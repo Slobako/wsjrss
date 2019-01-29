@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		4572F45D21FE34C700DF3668 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572F45C21FE34C700DF3668 /* AppDelegate.swift */; };
-		4572F45F21FE34C700DF3668 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572F45E21FE34C700DF3668 /* ViewController.swift */; };
 		4572F46221FE34C700DF3668 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4572F46021FE34C700DF3668 /* Main.storyboard */; };
 		4572F46421FE34C900DF3668 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4572F46321FE34C900DF3668 /* Assets.xcassets */; };
 		4572F46721FE34C900DF3668 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4572F46521FE34C900DF3668 /* LaunchScreen.storyboard */; };
 		4572F47221FE34C900DF3668 /* wsjrssTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572F47121FE34C900DF3668 /* wsjrssTests.swift */; };
 		4572F47D21FE34C900DF3668 /* wsjrssUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572F47C21FE34C900DF3668 /* wsjrssUITests.swift */; };
 		4572F48D21FE3E1800DF3668 /* WSJ_Logo_black_social.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4572F48C21FE3E1800DF3668 /* WSJ_Logo_black_social.gif */; };
+		4572F48F21FE424100DF3668 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572F48E21FE424100DF3668 /* FeedViewController.swift */; };
+		4572F49121FE456E00DF3668 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572F49021FE456E00DF3668 /* FeedItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +38,6 @@
 /* Begin PBXFileReference section */
 		4572F45921FE34C700DF3668 /* wsjrss.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wsjrss.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4572F45C21FE34C700DF3668 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4572F45E21FE34C700DF3668 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		4572F46121FE34C700DF3668 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4572F46321FE34C900DF3668 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4572F46621FE34C900DF3668 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -49,6 +49,8 @@
 		4572F47C21FE34C900DF3668 /* wsjrssUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = wsjrssUITests.swift; sourceTree = "<group>"; };
 		4572F47E21FE34C900DF3668 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4572F48C21FE3E1800DF3668 /* WSJ_Logo_black_social.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = WSJ_Logo_black_social.gif; sourceTree = "<group>"; };
+		4572F48E21FE424100DF3668 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		4572F49021FE456E00DF3668 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,12 +102,13 @@
 			isa = PBXGroup;
 			children = (
 				4572F45C21FE34C700DF3668 /* AppDelegate.swift */,
-				4572F45E21FE34C700DF3668 /* ViewController.swift */,
+				4572F48E21FE424100DF3668 /* FeedViewController.swift */,
 				4572F46021FE34C700DF3668 /* Main.storyboard */,
 				4572F46321FE34C900DF3668 /* Assets.xcassets */,
 				4572F48C21FE3E1800DF3668 /* WSJ_Logo_black_social.gif */,
 				4572F46521FE34C900DF3668 /* LaunchScreen.storyboard */,
 				4572F46821FE34C900DF3668 /* Info.plist */,
+				4572F49021FE456E00DF3668 /* FeedItem.swift */,
 			);
 			path = wsjrss;
 			sourceTree = "<group>";
@@ -260,7 +263,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4572F45F21FE34C700DF3668 /* ViewController.swift in Sources */,
+				4572F49121FE456E00DF3668 /* FeedItem.swift in Sources */,
+				4572F48F21FE424100DF3668 /* FeedViewController.swift in Sources */,
 				4572F45D21FE34C700DF3668 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
