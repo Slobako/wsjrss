@@ -11,13 +11,23 @@ import UIKit
 class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     // MARK: - Properties
+    let rssUrlString = "https://online.wsj.com/xml/rss/3_7085.xml"
     var arrayOfFeedItems: [FeedItem] = []
     fileprivate let identifier = "ItemCell"
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        if let rssUrl = URL(string: rssUrlString) {
+            FeedParser().startParsingContentsFrom(rssUrl: rssUrl) { (flag) in
+                if flag {
+                    // ... 
+                }
+            }
+        }
+        
+        
         
     }
     

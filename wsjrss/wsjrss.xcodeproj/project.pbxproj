@@ -16,6 +16,7 @@
 		4572F48D21FE3E1800DF3668 /* WSJ_Logo_black_social.gif in Resources */ = {isa = PBXBuildFile; fileRef = 4572F48C21FE3E1800DF3668 /* WSJ_Logo_black_social.gif */; };
 		4572F48F21FE424100DF3668 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572F48E21FE424100DF3668 /* FeedViewController.swift */; };
 		4572F49121FE456E00DF3668 /* FeedItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4572F49021FE456E00DF3668 /* FeedItem.swift */; };
+		459BB47A220246A0006E8351 /* FeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459BB479220246A0006E8351 /* FeedParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		4572F48C21FE3E1800DF3668 /* WSJ_Logo_black_social.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = WSJ_Logo_black_social.gif; sourceTree = "<group>"; };
 		4572F48E21FE424100DF3668 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
 		4572F49021FE456E00DF3668 /* FeedItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItem.swift; sourceTree = "<group>"; };
+		459BB479220246A0006E8351 /* FeedParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,13 +104,13 @@
 			isa = PBXGroup;
 			children = (
 				4572F45C21FE34C700DF3668 /* AppDelegate.swift */,
-				4572F48E21FE424100DF3668 /* FeedViewController.swift */,
-				4572F46021FE34C700DF3668 /* Main.storyboard */,
+				459BB47622023D5B006E8351 /* Models */,
+				459BB47822023DC1006E8351 /* View Controllers */,
+				459BB47722023D6A006E8351 /* Storyboards */,
 				4572F46321FE34C900DF3668 /* Assets.xcassets */,
 				4572F48C21FE3E1800DF3668 /* WSJ_Logo_black_social.gif */,
-				4572F46521FE34C900DF3668 /* LaunchScreen.storyboard */,
 				4572F46821FE34C900DF3668 /* Info.plist */,
-				4572F49021FE456E00DF3668 /* FeedItem.swift */,
+				459BB479220246A0006E8351 /* FeedParser.swift */,
 			);
 			path = wsjrss;
 			sourceTree = "<group>";
@@ -129,6 +131,31 @@
 				4572F47E21FE34C900DF3668 /* Info.plist */,
 			);
 			path = wsjrssUITests;
+			sourceTree = "<group>";
+		};
+		459BB47622023D5B006E8351 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4572F49021FE456E00DF3668 /* FeedItem.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		459BB47722023D6A006E8351 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				4572F46021FE34C700DF3668 /* Main.storyboard */,
+				4572F46521FE34C900DF3668 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		459BB47822023DC1006E8351 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4572F48E21FE424100DF3668 /* FeedViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +290,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				459BB47A220246A0006E8351 /* FeedParser.swift in Sources */,
 				4572F49121FE456E00DF3668 /* FeedItem.swift in Sources */,
 				4572F48F21FE424100DF3668 /* FeedViewController.swift in Sources */,
 				4572F45D21FE34C700DF3668 /* AppDelegate.swift in Sources */,
