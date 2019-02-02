@@ -48,7 +48,14 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 140.0
+        switch UIDevice.current.userInterfaceIdiom {
+        case .phone:
+            return 142
+        case .pad:
+            return 180
+        default:
+            return 142
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

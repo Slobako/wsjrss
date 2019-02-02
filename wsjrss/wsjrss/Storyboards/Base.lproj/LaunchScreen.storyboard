@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WSJ_Logo_black_social.gif" translatesAutoresizingMaskIntoConstraints="NO" id="U4m-bV-Mb0">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="WSJ_Logo_black_social" translatesAutoresizingMaskIntoConstraints="NO" id="U4m-bV-Mb0">
                                 <rect key="frame" x="0.0" y="93.5" width="375" height="500"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -41,6 +41,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="WSJ_Logo_black_social.gif" width="1200" height="630"/>
+        <image name="WSJ_Logo_black_social" width="1200" height="630"/>
     </resources>
 </document>
