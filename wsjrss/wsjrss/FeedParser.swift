@@ -39,7 +39,7 @@ class FeedParser: NSObject, XMLParserDelegate {
         
         // if encountered a new item, put the currently processed in the array of parsed items - better in didEnd
         if elementName == "item" {
-            arrayOfParsedItems.append(currentItem)
+            //arrayOfParsedItems.append(currentItem)
         }
         
         //if currentTag == media ...
@@ -64,8 +64,8 @@ class FeedParser: NSObject, XMLParserDelegate {
                 didEndElement elementName: String,
                 namespaceURI: String?,
                 qualifiedName qName: String?) {
-        if !tagContent.isEmpty {
-            tagContent = tagContent.trimmingCharacters(in: .whitespacesAndNewlines)
+        tagContent = tagContent.trimmingCharacters(in: .whitespacesAndNewlines)
+        if tagContent.count > 1 {
             
             switch currentTag {
             case "title":
@@ -82,6 +82,9 @@ class FeedParser: NSObject, XMLParserDelegate {
             }
         }
         tagContent = ""
+        if elementName == "item" {
+            arrayOfParsedItems.append(currentItem)
+        }
     }
     
     func parserDidEndDocument(_ parser: XMLParser) {

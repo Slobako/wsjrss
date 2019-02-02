@@ -14,7 +14,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var feedTableView: UITableView!
     
     // MARK: - Properties
-    let rssUrlString = "https://www.wsj.com/xml/rss/3_7085.xml"
+    let rssUrlString = "https://online.wsj.com/xml/rss/3_7085.xml"
     var arrayOfFeedItems: [FeedItem] = []
     fileprivate let cellIdentifier = "ItemCell"
     
@@ -32,6 +32,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
             }
         }
         
+        feedTableView.tableFooterView = UIView(frame: .zero)
         feedTableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
     }
@@ -47,7 +48,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80.0
+        return 140.0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
