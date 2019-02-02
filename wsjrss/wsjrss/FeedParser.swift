@@ -10,13 +10,13 @@ import Foundation
 
 class FeedParser: NSObject, XMLParserDelegate {
     
+    static let shared = FeedParser()
     var xmlParser: XMLParser?
     var isHeader = false
     var currentTag = ""
     var tagContent = ""
     var currentItem = FeedItem()
     var arrayOfParsedItems = [FeedItem]()
-    var sameTag = false
     
     func startParsingContentsFrom(rssUrl: URL, with completion: @ escaping (Bool) -> ()) {
         
@@ -35,11 +35,12 @@ class FeedParser: NSObject, XMLParserDelegate {
                 qualifiedName qName: String?,
                 attributes attributeDict: [String : String] = [:]) {
         
+        currentTag = elementName
+        
         // if encountered a new item, put the currently processed in the array of parsed items - better in didEnd
         if elementName == "item" {
             arrayOfParsedItems.append(currentItem)
         }
-        
         
         //if currentTag == media ...
         if elementName == "media:content" {
@@ -49,9 +50,11 @@ class FeedParser: NSObject, XMLParserDelegate {
     
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         
-        // remove possible html tags:
+        // sometimes the parser will retrieve the characters from same tag in several strings, so that's why concatenation
         if ["title", "link", "description", "pubDate"].contains(currentTag) {
             tagContent += string
+            
+            // remove possible html tags:
             tagContent = tagContent.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
         }
         
@@ -81,6 +84,9 @@ class FeedParser: NSObject, XMLParserDelegate {
         tagContent = ""
     }
     
-    
+    func parserDidEndDocument(_ parser: XMLParser) {
+        NotificationCenter.default.post(Notification(name: Notification.Name("ParserFinished")))
+        print("FEED ITEMS::: \(arrayOfParsedItems)")
+    }
 }
 

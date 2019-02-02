@@ -6,32 +6,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "wsjrss/FeedParser.swift"
-            timestampString = "570705866.113176"
+            filePath = "wsjrss/View Controllers/FeedViewController.swift"
+            timestampString = "570763736.484799"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "parser(_:didEndElement:namespaceURI:qualifiedName:)"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "parserFinished()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "wsjrss/View Controllers/FeedViewController.swift"
+            timestampString = "570763736.485899"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "parserFinished()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "wsjrss/FeedParser.swift"
-            timestampString = "570705866.113813"
+            timestampString = "570763736.487353"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "parser(_:foundCharacters:)"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
+            landmarkName = "parserDidEndDocument(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

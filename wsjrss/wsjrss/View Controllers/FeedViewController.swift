@@ -10,25 +10,35 @@ import UIKit
 
 class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    // MARK: - IBOutlets
+    @IBOutlet weak var feedTableView: UITableView!
+    
     // MARK: - Properties
-    let rssUrlString = "https://online.wsj.com/xml/rss/3_7085.xml"
+    let rssUrlString = "https://www.wsj.com/xml/rss/3_7085.xml"
     var arrayOfFeedItems: [FeedItem] = []
-    fileprivate let identifier = "ItemCell"
+    fileprivate let cellIdentifier = "ItemCell"
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(parserFinished), name: Notification.Name(rawValue: "ParserFinished"), object: nil)
+        
         if let rssUrl = URL(string: rssUrlString) {
-            FeedParser().startParsingContentsFrom(rssUrl: rssUrl) { (flag) in
+            FeedParser.shared.startParsingContentsFrom(rssUrl: rssUrl) { (flag) in
                 if flag {
                     // ... 
                 }
             }
         }
         
+        feedTableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
-        
+    }
+    
+    @objc func parserFinished() {
+        arrayOfFeedItems = FeedParser.shared.arrayOfParsedItems
+        feedTableView.reloadData()
     }
     
     // MARK: - Table view data source and delegate
@@ -36,9 +46,14 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return arrayOfFeedItems.count
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80.0
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as UITableViewCell
+        let cell: FeedTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FeedTableViewCell
+        cell.feedItem = arrayOfFeedItems[indexPath.row]
         return cell
     }
 
