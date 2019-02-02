@@ -22,12 +22,14 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self, selector: #selector(parserFinished), name: Notification.Name(rawValue: "ParserFinished"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(parserFinished),
+                                               name: Notification.Name(rawValue: "ParserFinished"),
+                                               object: nil)
         
         if let rssUrl = URL(string: rssUrlString) {
             FeedParser.shared.startParsingContentsFrom(rssUrl: rssUrl) { (flag) in
-                if flag {
-                    // ... 
+                if !flag {
+                    // ..
                 }
             }
         }
@@ -35,11 +37,6 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         feedTableView.tableFooterView = UIView(frame: .zero)
         feedTableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         
-    }
-    
-    @objc func parserFinished() {
-        arrayOfFeedItems = FeedParser.shared.arrayOfParsedItems
-        feedTableView.reloadData()
     }
     
     // MARK: - Table view data source and delegate
@@ -65,14 +62,28 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         return cell
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        let articleViewController = ArticleViewController()
+        articleViewController.articleUrlString = arrayOfFeedItems[indexPath.row].link
+        let navigationVC = UINavigationController(rootViewController: articleViewController)
+        articleViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back",
+                                                                                 style: .plain,
+                                                                                 target: self,
+                                                                                 action: #selector(dismissModal))
+        
+        present(navigationVC, animated: true, completion: nil)
     }
-    */
+    
+    // MARK: - #selector methods
+    @objc func parserFinished() {
+        arrayOfFeedItems = FeedParser.shared.arrayOfParsedItems
+        feedTableView.reloadData()
+    }
 
+    @objc func dismissModal() {
+        dismiss(animated: true, completion: nil)
+    }
 }
