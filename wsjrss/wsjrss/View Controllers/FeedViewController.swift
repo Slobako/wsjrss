@@ -52,7 +52,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         case .phone:
             return 142
         case .pad:
-            return 180
+            return 200
         default:
             return 142
         }

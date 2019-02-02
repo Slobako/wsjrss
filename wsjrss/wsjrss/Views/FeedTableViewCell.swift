@@ -28,11 +28,9 @@ class FeedTableViewCell: UITableViewCell {
             if let description = feedItem?.description {
                 descriptionLabel.text = description
             }
-//            if let imageUrlString = feedItem?.imageUrl {
-//                if let imageUrl = URL(string: imageUrlString) {
-//                    
-//                }
-//            }
+            if let imageUrlString = feedItem?.imageUrl {
+                thumbnailImageView.loadImageWith(urlString: imageUrlString)
+            }
         }
     }
     

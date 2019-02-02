@@ -18,6 +18,7 @@
 		459BB47A220246A0006E8351 /* FeedParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459BB479220246A0006E8351 /* FeedParser.swift */; };
 		459BB47E2204F039006E8351 /* FeedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459BB47C2204F039006E8351 /* FeedTableViewCell.swift */; };
 		459BB47F2204F039006E8351 /* FeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 459BB47D2204F039006E8351 /* FeedTableViewCell.xib */; };
+		459BB48422057702006E8351 /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 459BB48322057702006E8351 /* UIImageView+Cache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		459BB479220246A0006E8351 /* FeedParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedParser.swift; sourceTree = "<group>"; };
 		459BB47C2204F039006E8351 /* FeedTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTableViewCell.swift; sourceTree = "<group>"; };
 		459BB47D2204F039006E8351 /* FeedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FeedTableViewCell.xib; sourceTree = "<group>"; };
+		459BB48322057702006E8351 /* UIImageView+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				4572F45C21FE34C700DF3668 /* AppDelegate.swift */,
+				459BB4802205758D006E8351 /* Utils */,
 				459BB47622023D5B006E8351 /* Models */,
 				459BB47822023DC1006E8351 /* View Controllers */,
 				459BB47B2204EFAB006E8351 /* Views */,
@@ -167,6 +170,14 @@
 				459BB47D2204F039006E8351 /* FeedTableViewCell.xib */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		459BB4802205758D006E8351 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				459BB48322057702006E8351 /* UIImageView+Cache.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -306,6 +317,7 @@
 				4572F48F21FE424100DF3668 /* FeedViewController.swift in Sources */,
 				4572F45D21FE34C700DF3668 /* AppDelegate.swift in Sources */,
 				459BB47E2204F039006E8351 /* FeedTableViewCell.swift in Sources */,
+				459BB48422057702006E8351 /* UIImageView+Cache.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
