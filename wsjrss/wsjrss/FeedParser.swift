@@ -51,7 +51,7 @@ class FeedParser: NSObject, XMLParserDelegate {
     func parser(_ parser: XMLParser, foundCharacters string: String) {
         
         // sometimes the parser will retrieve the characters from same tag in several strings, so that's why concatenation
-        if ["title", "link", "description", "pubDate"].contains(currentTag) {
+        if ["title", "link", "description", "pubDate", "guid"].contains(currentTag) {
             tagContent += string
             
             // remove possible html tags:
@@ -76,6 +76,8 @@ class FeedParser: NSObject, XMLParserDelegate {
                 currentItem.description = tagContent
             case "pubDate":
                 currentItem.publicationDate = tagContent
+            case "guid":
+                currentItem.guid = tagContent
             default:
                 tagContent = ""
                 return
@@ -83,6 +85,12 @@ class FeedParser: NSObject, XMLParserDelegate {
         }
         tagContent = ""
         if elementName == "item" {
+            // when feed table view is refreshed, we don't want duplicates showing in the feed
+            for feedItem in arrayOfParsedItems {
+                if feedItem.guid == currentItem.guid {
+                    return
+                }
+            }
             arrayOfParsedItems.append(currentItem)
         }
     }

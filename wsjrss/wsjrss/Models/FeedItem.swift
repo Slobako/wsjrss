@@ -14,14 +14,5 @@ struct FeedItem {
     var description = ""
     var imageUrl = ""
     var publicationDate = ""
-    
-    
-//    // maybe not needed
-//    init(title: String, link: String, description: String, imageUrl: String, publicationDate: String) {
-//        self.title = title
-//        self.link = link
-//        self.description = description
-//        self.imageUrl = imageUrl
-//        self.publicationDate = publicationDate
-//    }
+    var guid = ""
 }
