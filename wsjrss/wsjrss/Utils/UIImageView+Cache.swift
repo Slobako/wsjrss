@@ -34,6 +34,11 @@ extension UIImageView {
                     self.image = downloadedImage
                 })
             }
+            if error != nil {
+                // set default image in case of error
+                self.image = UIImage(named: "WSJ_Logo_black_social")
+                return
+            }
         }
         task.resume()
     }

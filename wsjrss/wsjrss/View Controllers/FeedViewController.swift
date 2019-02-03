@@ -14,9 +14,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @IBOutlet weak var feedTableView: UITableView!
     
     // MARK: - Properties
-    let rssUrlString = "https://online.wsj.com/xml/rss/3_7085.xml"
+    let rssUrlString = "https://www.wsj.com/xml/rss/3_7085.xml"
     var arrayOfFeedItems: [FeedItem] = []
     fileprivate let cellIdentifier = "ItemCell"
+    let refreshControl = UIRefreshControl()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -26,17 +27,32 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                                name: Notification.Name(rawValue: "ParserFinished"),
                                                object: nil)
         
+        fetchAndParseFeed()
+        setTableView()
+    }
+    
+    func fetchAndParseFeed() {
         if let rssUrl = URL(string: rssUrlString) {
             FeedParser.shared.startParsingContentsFrom(rssUrl: rssUrl) { (flag) in
                 if !flag {
-                    // ..
+                    let alert = UIAlertController(title: "Something went wrong",
+                                                  message: "Feed currently unavailable",
+                                                  preferredStyle: .alert)
+                    self.present(alert, animated: true, completion: nil)
                 }
             }
         }
-        
+    }
+    
+    func setTableView() {
         feedTableView.tableFooterView = UIView(frame: .zero)
         feedTableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
-        
+        if #available(iOS 10.0, *) {
+            feedTableView.refreshControl = refreshControl
+        } else {
+            feedTableView.addSubview(refreshControl)
+        }
+        refreshControl.addTarget(self, action: #selector(refreshFeed), for: .valueChanged)
     }
     
     // MARK: - Table view data source and delegate
@@ -59,12 +75,11 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         
         let cell: FeedTableViewCell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! FeedTableViewCell
         cell.feedItem = arrayOfFeedItems[indexPath.row]
+        cell.selectionStyle = .none
         return cell
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        tableView.deselectRow(at: indexPath, animated: false)
         
         let articleViewController = ArticleViewController()
         articleViewController.articleUrlString = arrayOfFeedItems[indexPath.row].link
@@ -81,9 +96,17 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @objc func parserFinished() {
         arrayOfFeedItems = FeedParser.shared.arrayOfParsedItems
         feedTableView.reloadData()
+        
+        if refreshControl.isRefreshing {
+            refreshControl.endRefreshing()
+        }
     }
 
     @objc func dismissModal() {
         dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func refreshFeed() {
+        fetchAndParseFeed()
     }
 }
