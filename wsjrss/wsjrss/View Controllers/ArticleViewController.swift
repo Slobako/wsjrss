@@ -13,12 +13,19 @@ class ArticleViewController: UIViewController {
 
     // MARK: - Properties
     var articleUrlString = ""
+    var webView = WKWebView()
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let webView = WKWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        setWebView()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshTapped))
+    }
+    
+    func setWebView() {
+        webView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         view.addSubview(webView)
         
         // enable back and forward swiping
@@ -28,8 +35,8 @@ class ArticleViewController: UIViewController {
             webView.load(URLRequest(url: url))
         }
     }
-    
 
-    
-
+    @objc func refreshTapped() {
+        webView.reload()
+    }
 }
