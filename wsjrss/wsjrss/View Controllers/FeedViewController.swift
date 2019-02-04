@@ -12,9 +12,11 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     
     // MARK: - IBOutlets
     @IBOutlet weak var feedTableView: UITableView!
+    @IBOutlet var feedIcons: [UIImageView]!
+    @IBOutlet var feedButtons: [UIButton]!
     
     // MARK: - Properties
-    let rssUrlString = "https://www.wsj.com/xml/rss/3_7085.xml"
+    var rssUrlString = "https://www.wsj.com/xml/rss/3_7085.xml"
     var arrayOfFeedItems: [FeedItem] = []
     fileprivate let cellIdentifier = "ItemCell"
     let refreshControl = UIRefreshControl()
@@ -35,16 +37,19 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         if let rssUrl = URL(string: rssUrlString) {
             FeedParser.shared.startParsingContentsFrom(rssUrl: rssUrl) { (flag) in
                 if !flag {
-                    let alert = UIAlertController(title: "Something went wrong",
-                                                  message: "Feed currently unavailable",
-                                                  preferredStyle: .alert)
-                    self.present(alert, animated: true, completion: nil)
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Something went wrong",
+                                                      message: "Feed currently unavailable",
+                                                      preferredStyle: .alert)
+                        self.present(alert, animated: true, completion: nil)
+                    }
                 }
             }
         }
     }
     
     func setTableView() {
+        feedTableView.accessibilityIdentifier = "FeedTableView"
         feedTableView.tableFooterView = UIView(frame: .zero)
         feedTableView.register(UINib(nibName: "FeedTableViewCell", bundle: nil), forCellReuseIdentifier: cellIdentifier)
         if #available(iOS 10.0, *) {
@@ -54,6 +59,37 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
         }
         refreshControl.addTarget(self, action: #selector(refreshFeed), for: .valueChanged)
     }
+    
+    // MARK: - IBActions
+    @IBAction func feedButtonTapped(_ sender: UIButton) {
+        for button in feedButtons {
+            button.isSelected = false
+        }
+        switch sender.tag {
+        case 1: // world news
+            rssUrlString = "https://www.wsj.com/xml/rss/3_7085.xml"
+            sender.isSelected = true
+        case 2: // opinion
+            rssUrlString = "https://www.wsj.com/xml/rss/3_7041.xml"
+            sender.isSelected = true
+        case 3: // U.S. Biz
+            rssUrlString = "https://www.wsj.com/xml/rss/3_7014.xml"
+            sender.isSelected = true
+        case 4: // markets
+            rssUrlString = "https://www.wsj.com/xml/rss/3_7031.xml"
+            sender.isSelected = true
+        case 5: // tech
+            rssUrlString = "https://www.wsj.com/xml/rss/3_7455.xml"
+            sender.isSelected = true
+        case 6: // lifestyle
+            rssUrlString = "https://www.wsj.com/xml/rss/3_7201.xml"
+            sender.isSelected = true
+        default: // world news
+            rssUrlString = "https://www.wsj.com/xml/rss/3_7085.xml"
+        }
+        fetchAndParseFeed()
+    }
+    
     
     // MARK: - Table view data source and delegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -82,7 +118,7 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let articleViewController = ArticleViewController()
-        articleViewController.articleUrlString = arrayOfFeedItems[indexPath.row].link
+        articleViewController.articleUrlString = arrayOfFeedItems[indexPath.row].link ?? "https://www.wsj.com"
         let navigationVC = UINavigationController(rootViewController: articleViewController)
         articleViewController.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back",
                                                                                  style: .plain,
@@ -96,7 +132,10 @@ class FeedViewController: UIViewController, UITableViewDataSource, UITableViewDe
     @objc func parserFinished() {
         arrayOfFeedItems = FeedParser.shared.arrayOfParsedItems
         feedTableView.reloadData()
-        
+        if feedTableView.numberOfRows(inSection: 0) > 0 {
+            feedTableView.scrollToRow(at: IndexPath.init(row: 0, section: 0), at: .top, animated: true)
+        }
+
         if refreshControl.isRefreshing {
             refreshControl.endRefreshing()
         }

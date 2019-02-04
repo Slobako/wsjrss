@@ -9,10 +9,10 @@
 import Foundation
 
 struct FeedItem {
-    var title = ""
-    var link = ""
-    var description = ""
-    var imageUrl = ""
-    var publicationDate = ""
-    var guid = ""
+    var title: String?
+    var link: String?
+    var description: String?
+    var imageUrl: String?
+    var publicationDate: String?
+    var guid: String?
 }

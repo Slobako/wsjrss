@@ -10,21 +10,21 @@ import Foundation
 
 class FeedParser: NSObject, XMLParserDelegate {
     
+    // MARK: - Properties
     static let shared = FeedParser()
     var xmlParser: XMLParser?
     var isHeader = false
     var currentTag = ""
     var tagContent = ""
-    var currentItem = FeedItem()
+    var currentItem = FeedItem(title: "", link: "", description: "", imageUrl: "", publicationDate: "", guid: "")
     var arrayOfParsedItems = [FeedItem]()
     
+    // MARK: - Methods
     func startParsingContentsFrom(rssUrl: URL, with completion: @ escaping (Bool) -> ()) {
-        
+        arrayOfParsedItems.removeAll()
         let parser = XMLParser(contentsOf: rssUrl)
         parser?.delegate = self
         if let flag = parser?.parse() {
-            
-            //arrayOfParsedItems.append(currentItem)
             completion(flag)
         }
     }
@@ -37,12 +37,6 @@ class FeedParser: NSObject, XMLParserDelegate {
         
         currentTag = elementName
         
-        // if encountered a new item, put the currently processed in the array of parsed items - better in didEnd
-        if elementName == "item" {
-            //arrayOfParsedItems.append(currentItem)
-        }
-        
-        //if currentTag == media ...
         if elementName == "media:content" {
             currentItem.imageUrl = attributeDict["url"] ?? ""
         }
@@ -57,7 +51,6 @@ class FeedParser: NSObject, XMLParserDelegate {
             // remove possible html tags:
             tagContent = tagContent.replacingOccurrences(of: "<[^>]+>", with: "", options: .regularExpression, range: nil)
         }
-        
     }
     
     func parser(_ parser: XMLParser,
@@ -97,7 +90,9 @@ class FeedParser: NSObject, XMLParserDelegate {
     
     func parserDidEndDocument(_ parser: XMLParser) {
         NotificationCenter.default.post(Notification(name: Notification.Name("ParserFinished")))
+        #if DEBUG
         print("FEED ITEMS::: \(arrayOfParsedItems)")
+        #endif
     }
 }
 
