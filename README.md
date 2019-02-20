@@ -6,6 +6,6 @@ https://www.wsj.com/public/page/rss_news_and_feeds.html
 
 Features:
 - parsing RSS feed for different categories
-- native async image download
+- native async image download & caching downloaded images
 - table view refresh control
 - back and forward swipe gestures on web view displaying individual articles
